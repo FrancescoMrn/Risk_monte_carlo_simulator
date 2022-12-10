@@ -19,8 +19,7 @@ class UnitLosses:
 
 
 class RiskGame(object):
-    def __init__(self, state: State, die) -> None:
-        self.state = state
+    def __init__(self, die: tuple) -> None:
         self.die = die
 
     def _random_roll(self, n: int) -> list[int]:
