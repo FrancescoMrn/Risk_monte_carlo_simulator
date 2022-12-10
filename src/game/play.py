@@ -1,13 +1,13 @@
-from typing import List, Iterable, Tuple
-from collections import Counter
-from functools import lru_cache
-from dataclasses import dataclass
 import random
+from collections import Counter
+from dataclasses import dataclass
+
 
 @dataclass(frozen=True)
 class State:
     A: int # Number of attackers
     D: int # Number of defenders
+
 
 @dataclass(frozen=True)
 class UnitLosses:
@@ -17,12 +17,13 @@ class UnitLosses:
     A: int
     D: int
 
+
 class RiskGame(object):
     def __init__(self, state: State, die) -> None:
         self.state = state
         self.die = die
 
-    def _random_roll(self, n: int) -> List[int]:
+    def _random_roll(self, n: int) -> list[int]:
         """
         Roll n dice with a customizeble dimention.
 
