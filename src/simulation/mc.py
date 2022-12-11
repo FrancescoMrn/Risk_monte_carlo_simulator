@@ -1,5 +1,6 @@
 import numpy as np
 import logging
+from typing import Union
 from collections import Counter
 from dataclasses import dataclass
 from src.game.play import State, RiskGame
@@ -13,6 +14,7 @@ class SimoutResults:
     p_win: float # Winning probability
     p_win_low: float # Winning probability low boundary (+3sigma)
     p_win_high: float # Winning probability high boundary (-3sigma)
+    sim_std_value: float # Standard Deviation value of the binomial variable
 
 
 @dataclass(frozen=True)
@@ -86,8 +88,18 @@ class MCSimulation(object):
                     p_win_defender.p_win_low
                     )
                 )
-
+        
         return defense_probability
+    
+    def marginal_defence_improvement(self, simout: DefenseImprovement) -> Union[int, list]:
+        marginal_gain = np.empty(shape=(len(simout), 2))
+        for index, sim in enumerate(simout):
+            marginal_gain[index, 0] = np.round(sim.p_win - simout[index-1].p_win, 3)
+            marginal_gain[index, 1] = sim.n_defenders
+            # calculate the max marginal improvement and store the number of defenders
+        units_highest_marginal_gain = marginal_gain[np.argmax(marginal_gain[:,0], axis=0), 1]
+        defender_additional_units = units_highest_marginal_gain - simout[0].n_defenders
+        return defender_additional_units, marginal_gain
 
     def pwin_probability(self, prob_distribution: Counter, entity="attacker") -> SimoutResults:
         if entity=="attacker":
@@ -96,9 +108,15 @@ class MCSimulation(object):
             p_win = sum(prob_distribution[s] for s in prob_distribution if s.A <= s.D)
         else:
             raise ValueError("Entity not reconize select between: attacker or defender")
-        # using the expected value of the binomial variable it is possible to calculate the standard deviation
-        expected_value = np.sqrt(p_win*(1-p_win)/self.runs)
-        return SimoutResults(np.round(p_win, 3), np.clip(np.round(p_win-3*expected_value, 3), 0, 1), np.clip(np.round(p_win+3*expected_value, 3), 0, 1))
+        # using the expected value of the binomial variable it is possible to calculate the standard deviation 
+        # of the cumulative distribution
+        standard_deviation  = np.sqrt(p_win*(1-p_win)/self.runs)
+        return SimoutResults(
+            np.round(p_win, 3),
+            np.clip(np.round(p_win-3*standard_deviation, 3), 0, 1), 
+            np.clip(np.round(p_win+3*standard_deviation, 3), 0, 1),
+            np.round(standard_deviation, 3)
+            )
 
 
 def attacker_delta_simulator(sim_delta: tuple, max_defenders: int, die: tuple=(1, 2, 3, 4, 5, 6), mc_runs: int = 1000) -> list[AttackerDeltaSimulation]:

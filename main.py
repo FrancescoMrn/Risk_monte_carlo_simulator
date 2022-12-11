@@ -17,7 +17,7 @@ DIE  = (1, 2, 3, 4, 5, 6) # define the die
 
 if __name__ == "__main__":
     # Set the initial state of the simulation
-    state = State(A=8, D=4)
+    state = State(A=10, D=10)
     logger.info(f"Initial conditions: {state}")
 
     # Set up the game and the MC Simulation
@@ -29,10 +29,11 @@ if __name__ == "__main__":
     simout_attacker = mcsim.simulate_multiple_attack(state=state, normalization=True)
     plot_histogram_probability(simout_attacker, state)
     attacker_pwin = mcsim.pwin_probability(simout_attacker)
-    logger.info(f"Aggregated probability of win is: {attacker_pwin.p_win}")
-    logger.info(f"Uncertainty range (±3sigma): {attacker_pwin.p_win_low, attacker_pwin.p_win_high}")
+    logger.info(f"Cumulative probability of attacker win is: {attacker_pwin.p_win}")
+    logger.info(f"Binomial Distr. Std (±3sigma): {attacker_pwin.p_win_low, attacker_pwin.p_win_high}")
 
     # Defender MC Simulation
     logger.info("Run simulation to estimate the defender position...")
     simout_defender = mcsim.simulate_defense_improvement(n_defenders = state.D, n_attacker = state.A, max_defenders = state.A * 2)
-    plot_defence_improvements(simout_defender, state)
+    defender_additional_units, marginal_gain = mcsim.marginal_defence_improvement(simout_defender)
+    plot_defence_improvements(simout_defender, state, marginal_gain, save_fig=True)
