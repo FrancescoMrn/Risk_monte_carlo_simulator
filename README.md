@@ -1,140 +1,110 @@
-# MC Simulation of Risk (board game)
+# Risk (game) Monte Carlo Simulator
+
+![Risk board](images/risk_game.jpg)
+
+<center>Risk game map</center>
 
 ## Intro
 
-So you just decided to add a README to your project. You want to create an easy
-to read and easy to navigate file.
+One exciting application of Monte Carlo Simulations is that they allow you to make better decisions when given a range of possible scenarios, which is especially useful in financial sectors such as risk or portfolio management. However, although less useful, its an interesting idea to apply high-level statistical tools such as Monte Carlo Simulation (MCS) to board games such *Risk*.
 
-The question is: What should you do next?
+This repository contains all the code used to develop the Streamlit App and run the simulation locally.
 
-Should you create one from scratch? Find a silver bullet solution? Or is it
-better to customize an already existing file?
+## Quick Start
 
-I'm going to show you how to create a README that fits your project, is easy
-to read and contains everyting you will ever need.
+For a quick start, it is possible to use the simulation tool without any installation by accessing the dashboard hosted by Streamlit.
 
-## Feature overview
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/yourGitHubName/yourRepo/yourApp/) 
 
-*   [x] **Easy to read** like an article
-*   [x] **Feature overview and Contents** for fast orientation
-*   [ ] **Visuals** to keep users engaged
+[Open the Streamlit App]()
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
 *   [Getting started](#getting-started)
-    *   [Requirements](#requirements)
-    *   [Install](#install)
+    *   [Install locally](#install-locally)
     *   [Usage](#usage)
-*   [Here is where it's your turn](#here-is-where-its-your-turn)
-*   [Don't forget anything](#dont-forget-anything)
-    * [Used Technologies](#used-technologies)
-    * [Testing](#testing)
-    * [Logging](#logging)
+*   [Functionalities and Outcomes](#functionalities-and-outcomes)
 *   [Contribute](#contribute)
 *   [License](#license)
-*   [Sources](#sources)
 *   [Conclusion](#conclusion)
-
-## What is this?
-
-This project is an exhaustive README template that you can customize to your needs.
-You can either add sections you like or remove sections you don't like. But you have
-every time an example in front of you, from which you can derive from.
-
-## Why should I use this?
-
-There are many README templates out there so why this one? The two main reasons for this are
-that they contain often too little content or they are not easy to read or navigate through.
+*   [References](#references)
 
 ## Getting Started
 
 So how do you get this template to work for your project? It is easier than you think.
 
-### Requirements
-
-* Have a project ready where you can add a README
-* Basic knowledge of [Markdown][about-markdown] (here is a [Cheatsheet][markdown-cheatsheet])
-
-### Install
+### Install Locally
 
 Use git to clone this repository into your computer.
 
+```bash
+git clone https://github.com/FrancescoMrn/MC_simulation_risk
 ```
-git clone https://gitlab.com/kopino4-templates/readme-template
+
+Create a new environment i.e. with conda. Activate it and install the required packages
+
+```bash
+conda create -n risk_mc python=3.10 -y
+conda activate risk_mc
+```
+
+Move into the git repo cloned above and run
+
+```bash
+pip install -r requirements.txt
 ```
 
 ### Usage
 
-Use the well known command to copy the template
+The main script can be executed by using the following command.
 
 ```bash
-# Copy the content
-CTRL + C
-
-# Pase into your project
-CTRL + V
+# Run the main script
+python main.py
 ```
 
-## Here is where it's your turn
+Nevertheless, the script in the current version does not expose any parameters to the command windows. To change the parameters or explore the code, running the script with an IDE is suggested.
 
-Here starts the main content of your README. This is why you did it for in the first place.
-To describe to future users of this project (including yourself) everything they need to know
-to be able to use it and understand it.
+## Functionalities and Outcomes
 
-Use visuals to help the reader understand better. An image, diagram, chart or code example says
-more than thousand words
+The code is designed to produce for a specific state (number of attackers, number of defenders) the following results:
 
+- Probability of Win of the Attacker (A)
+- Probability of Win of the Defender (A)
+- Binomial Distribution Standard Deviation
+- Number of units that best increase the defense capabilities (given the initial conditions)
 
-## Don't forget anything
+Additional to the above results, the code produces three plots, saved inside the folder ```/plots```:
 
-Think hard about anything that is clear to you but might not be clear for others. Why are you
-using this aproach or why did you pick this solution instead?
-
-### Used technologies
-
-For sure mention all the technologies you used. If the technologies age in time you don't forget
-they are used and need to be replaced.
-
-### Testing
-
-No tests no sucess. You SHOULD have tests for every project, but do new users know how to run them?
-
-### Logging
-
-Logging is essential. How do you know something went wrong if the computer doesn't tell you? Logs
-are the first place to search for bugs. Explain to everybody how you can customize it or used it
-in the right way.
+- Win probability and remaining units (for attacker and defender)
+- Defender probability of a win for the incremental number of units
+- Risk attacker strategy - Overview of how the delta, the difference in units between Attacker/Defender, affects the game
 
 ## Contribute
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+Pull requests are welcome. For significant changes, please open an issue to discuss what you would like to change.
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
-
-## Sources
-
-[react-markdown][react-markdown] - Project which served as an inspiration for this README
-
-[Blog post templates][blog-post-templates] - Used to structure this template as an easy to read blog post
-
-[About markdown][about-markdown] - Why should you use markdown?
-
-[Markdown Cheat Sheet][markdown-cheatsheet] - Get a fast overview of the syntax
-
-[//]: # "Source definitions"
-[react-markdown]: https://github.com/remarkjs/react-markdown "React-markdown project"
-[blog-post-templates]: https://backlinko.com/hub/content/blog-post-templates "Backlinko blog post templates"
-[about-markdown]: https://www.markdownguide.org/getting-started/ "Introduction to markdown"
-[markdown-cheatsheet]: https://www.markdownguide.org/cheat-sheet/ "Markdown Cheat Sheet"
 
 ## Conclusion
 
-To summarize.
+To summarise, his repository implements a complete Monte Carlo Simulation of the game *Risk*. Through the simulation, some patterns specific to the game can be highlighted:
 
-We have an exhaustive README template with many features. The README is easy to read and navigate like an article.
-In our future projects we can use this template to get a great head start in creating a custom README.
+**Attackers strategy tip:**
+
+- Aggressive strategies should be preferred over defensive ones
+- Attack a territory only with a numerical advantage
+- With more than five units than the defender, the probability of a win is ~90%
+
+**Defenders strategy tip:**
+
+- It's better to double up defence on single territories to improve the overall defence capability.
+- The best reinforcement strategy is to get your regions up to the number of armies of the attacker.
+
+
+## References
+
+- Game rules and image [Ultra Board Games](https://www.ultraboardgames.com/risk/game-rules.php)
+- [Simulating Risk The Board Game](https://juliangarratt.com/monte-carlo-simulations-simulating-risk-the-board-game/)

@@ -40,7 +40,7 @@ def plot_histogram_probability(simout: Counter, state: State, save_root: str="pl
     
     if save_fig:
         save_path = f"{save_root}/risk_status_simulation.png"
-        fig.savefig(save_path, dpi=fig.dpi)
+        fig.savefig(save_path, dpi=fig.dpi, bbox_inches="tight")
         logger.info(f" -- Plot saved at the following path: {save_path}")
     else:
         return fig
@@ -56,7 +56,7 @@ def plot_defence_improvements(simout_defender: list[DefenseImprovement], state: 
         else:
             plt.bar(sim.n_defenders, sim.p_win, color="#4C72B0")
             plt.scatter(sim.n_defenders, marginal_gain[index, 0], color="#DD8452", marker="o", s=45)
-        plt.title(f'Defender probability of win for incremental units\n Initial {state}')
+        plt.title(f'Defender probability of win for incremental number of units\n Initial {state}')
         plt.legend()
         plt.xlabel('Number of units of the Defender [Units]')
         plt.ylabel('Probability of win of the defender')

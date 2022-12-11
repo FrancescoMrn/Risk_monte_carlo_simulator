@@ -25,14 +25,6 @@ class RiskGame(object):
     def _random_roll(self, n: int) -> list[int]:
         """
         Roll n dice with a customizeble dimention.
-
-
-        Args:
-            n (_type_): _description_
-            die (_type_, optional): _description_. Defaults to DIE.
-
-        Returns:
-            Dice: _description_
         """
 
         return [random.choice(self.die) for _ in range(n)]
@@ -41,13 +33,6 @@ class RiskGame(object):
     def battle_outcome(self, A_rolls_n_dice: int, D_rolls_n_dice: int) -> UnitLosses:
         """
         How many (attacker, defender) armies perish as the result of these dice?
-
-        Args:
-            A_dice (Dice): _description_
-            D_dice (Dice): _description_
-
-        Returns:
-            _type_: _description_
         """
         A_dice = self._random_roll(A_rolls_n_dice)
         D_dice = self._random_roll(D_rolls_n_dice)
@@ -59,18 +44,13 @@ class RiskGame(object):
     def update(self, state: State, dead: UnitLosses) -> State:
         """
         Update the `state` of a campaign to reflect the`dead` in a battle.
-        
-        Args:
-            state (State): _description_
-            dead (UnitLosses): _description_
-
-        Returns:
-            State: _description_
         """       
         a = state.A - dead.A  # Attackers remaining
         d = state.D - dead.D  # First territory defenders remaining
         return State(a, d)      
 
     def check_game_status(self, state: State) -> bool: 
-        """Is the game over?"""
+        """
+        Check the status of the game
+        """
         return state.D == 0 or state.A <= 1

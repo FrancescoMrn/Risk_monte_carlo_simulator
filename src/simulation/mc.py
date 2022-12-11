@@ -42,13 +42,6 @@ class MCSimulation(object):
     def simulate_single_attack(self, state: State) -> State:
         """
         Simulate a single attack campaign with random rolls and returs the final state.
-
-        Args:
-            state (_type_): _description
-            riskgame (RiskGame): _description_
-
-        Returns:
-            State: _description_
         """
     
         while not self.riskgame.check_game_status(state):
