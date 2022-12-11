@@ -37,7 +37,7 @@ defender_pwin = mcsim.pwin_probability(simout_attacker, entity="defender")
 hist = plot_histogram_probability(simout_attacker, state, save_fig=False)
 
 # Defender MC Simulation
-simout_defender = mcsim.simulate_defense_improvement(n_defenders = state.D, n_attacker = state.A, max_defenders = state.A * 2)
+simout_defender = mcsim.simulate_defense_improvement(n_defenders = state.D, n_attacker = state.A, max_defenders = max(state.A * 2, state.D + 5))
 defender_additional_units, marginal_gain = mcsim.marginal_defence_improvement(simout_defender)
 bars= plot_defence_improvements(simout_defender, state, marginal_gain, save_fig=False)
 

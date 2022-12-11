@@ -34,6 +34,6 @@ if __name__ == "__main__":
 
     # Defender MC Simulation
     logger.info("Run simulation to estimate the defender position...")
-    simout_defender = mcsim.simulate_defense_improvement(n_defenders = state.D, n_attacker = state.A, max_defenders = state.A * 2)
+    simout_defender = mcsim.simulate_defense_improvement(n_defenders = state.D, n_attacker = state.A, max_defenders = max(state.A * 2, state.D + 5))
     defender_additional_units, marginal_gain = mcsim.marginal_defence_improvement(simout_defender)
     plot_defence_improvements(simout_defender, state, marginal_gain, save_fig=True)
