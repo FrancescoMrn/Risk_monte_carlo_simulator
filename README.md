@@ -14,9 +14,9 @@ This repository contains all the code used to develop the Streamlit App and run 
 
 For a quick start, it is possible to use the simulation tool without any installation by accessing the dashboard hosted by Streamlit.
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/yourGitHubName/yourRepo/yourApp/) 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://francescomrn-risk-monte-carlo-simulator-app-lheo12.streamlit.app/) 
 
-[Open the Streamlit App]()
+[Open the Streamlit App](https://francescomrn-risk-monte-carlo-simulator-app-lheo12.streamlit.app/)
 
 ## Contents
 
