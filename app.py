@@ -13,7 +13,7 @@ st.set_page_config(page_title="Risk MC")
 
 st.title('Risk (game) Monte Carlo Simulator')
 st.markdown("""<span style="word-wrap:break-word;">\
-        This web app simulate the game and calulate \
+        This web app simulates the game and calculates \
         the probabilities of winning a round given the initial conditions\
         </span>""", unsafe_allow_html=True)
 st.image("images/risk_game.jpg", caption="Risk game map")
@@ -48,13 +48,13 @@ col1.metric("Attacker P Win", attacker_pwin.p_win)
 col2.metric("Denfender P Win", defender_pwin.p_win)
 col3.metric("Binomial Distr. Std", attacker_pwin.sim_std_value)
 
-st.markdown("""**Attacker Position Desciption:**""", unsafe_allow_html=True)
+st.markdown("""**Attacker Position Description:**""", unsafe_allow_html=True)
 st.write("The aggregated probability of win for the attacker is:", attacker_pwin.p_win, "💣")
 st.write("including the estimated ±3sigma (standard deviation) we obtain the range:") 
 st.write("- highest probability of winning is:", attacker_pwin.p_win_high)
 st.write("- lowest probability of winning is:", attacker_pwin.p_win_low)
 
-st.markdown("""**Defender Position Desciption:**""", unsafe_allow_html=True)
+st.markdown("""**Defender Position Description:**""", unsafe_allow_html=True)
 st.write("The aggregated probability of win for the defender is:", defender_pwin.p_win, "🏰")
 st.write("including the estimated ±3sigma (standard deviation) we obtain the range:") 
 st.write("- highest probability of winning is:", defender_pwin.p_win_high)
