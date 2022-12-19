@@ -96,7 +96,7 @@ To summarise, this repository implements a complete Monte Carlo Simulation of th
 
 - Aggressive strategies should be preferred over defensive ones
 - Attack a territory only with a numerical advantage
-- With more than five units than the defender, the probability of a win is more than 90%
+- With more than five units than the defender, the probability of a win is more than 80%
 
 **Defenders strategy tip:**
 
