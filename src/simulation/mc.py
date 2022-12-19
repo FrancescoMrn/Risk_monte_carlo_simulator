@@ -11,27 +11,36 @@ logger = logging.getLogger(__name__)
 
 @dataclass(frozen=True)
 class SimoutResults:
+    """
+    MCS results
+    """
     p_win: float # Winning probability
-    p_win_low: float # Winning probability low boundary (+3sigma)
-    p_win_high: float # Winning probability high boundary (-3sigma)
+    p_win_low: float # Winning probability low boundary (-3sigma)
+    p_win_high: float # Winning probability high boundary (+3sigma)
     sim_std_value: float # Standard Deviation value of the binomial variable
 
 
 @dataclass(frozen=True)
 class AttackerDeltaSimulation:
+    """
+    Series of P(win) for the Attacker given the delta (in units) from the Defender.
+    """
     delta: int
     n_defenders: list[int]
     p_win_history: list[float] # Winning probability of the attacker
-    p_win_low_history: list[float] # Winning probability of the attacker low boundary (+3sigma)
-    p_win_high_history: list[float] # Winning probability of the attacker high boundary (-3sigma)
+    p_win_low_history: list[float] # Winning probability of the attacker low boundary (-3sigma)
+    p_win_high_history: list[float] # Winning probability of the attacker high boundary (+3sigma)
 
 
 @dataclass(frozen=True)
 class DefenseImprovement:
+    """
+    Marginal improvement of the Defence
+    """
     n_defenders: int
     p_win: float # Winning probability of the defender 
-    p_win_low: float # Winning probability low boundary (+3sigma)
-    p_win_high: float # Winning probability high boundary (-3sigma)
+    p_win_low: float # Winning probability low boundary (-3sigma)
+    p_win_high: float # Winning probability high boundary (+3sigma)
 
 
 class MCSimulation(object):
@@ -54,6 +63,9 @@ class MCSimulation(object):
         return state
 
     def simulate_multiple_attack(self, state: State, normalization: bool=True) -> Counter | list:
+        """
+        Simulate multiple games/round given an initial state
+        """
         simulate_game_p = [] 
         for _ in range(self.runs):
             simulate_game_p.append(self.simulate_single_attack(state))
@@ -64,6 +76,9 @@ class MCSimulation(object):
         return simulate_game_p
 
     def simulate_defense_improvement(self, n_defenders: int, n_attacker: int, max_defenders: int) -> list[DefenseImprovement]:
+        """
+        Calculate defence improvement for each additional unit from the current state
+        """
         defense_probability = []
         for n_defenders in range(n_defenders, max_defenders + 1):
             prob_distribution = []
@@ -85,6 +100,9 @@ class MCSimulation(object):
         return defense_probability
     
     def marginal_defence_improvement(self, simout: DefenseImprovement) -> Union[int, list]:
+        """
+        Estimate marginal defence improvement for each additional unit
+        """
         marginal_gain = np.empty(shape=(len(simout), 2))
         for index, sim in enumerate(simout):
             marginal_gain[index, 0] = np.round(sim.p_win - simout[index-1].p_win, 3)
@@ -95,6 +113,9 @@ class MCSimulation(object):
         return defender_additional_units, marginal_gain
 
     def pwin_probability(self, prob_distribution: Counter, entity="attacker") -> SimoutResults:
+        """
+        Calculate probability of win
+        """
         if entity=="attacker":
             p_win = sum(prob_distribution[s] for s in prob_distribution if not s.D)
         elif entity=="defender":
@@ -113,6 +134,9 @@ class MCSimulation(object):
 
 
 def attacker_delta_simulator(sim_delta: tuple, max_defenders: int, die: tuple=(1, 2, 3, 4, 5, 6), mc_runs: int = 1000) -> list[AttackerDeltaSimulation]:
+    """
+    Simulate global strategy given a range of max defenfers
+    """
     simout_delta = []
     for delta in sim_delta:
         logger.info(f" -- Simulation delta: {delta:2}")

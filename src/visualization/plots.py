@@ -11,11 +11,12 @@ from src.simulation.mc import AttackerDeltaSimulation, DefenseImprovement
 logger = logging.getLogger(__name__)
 
 # import style
-#plt.style.library['seaborn-v0_8-dark']
-plt.style.use('seaborn-bright')	
-
+plt.style.use('seaborn-deep')
 
 def plot_histogram_probability(simout: Counter, state: State, save_root: str="plots", save_fig: bool=True) -> Figure:
+    """
+    Histogram plot of the probabilty for Attacker and Defender
+    """
     records = []
     for ele in simout:
         entry = {
@@ -47,6 +48,9 @@ def plot_histogram_probability(simout: Counter, state: State, save_root: str="pl
 
 
 def plot_defence_improvements(simout_defender: list[DefenseImprovement], state: State, marginal_gain: list, save_root: str="plots",  save_fig: bool=True) -> Figure:
+    """
+    Plot reporting the marginal improvement of the defence.
+    """
     fig = plt.figure(figsize=(11, 7))
     for index, sim in enumerate(simout_defender):
         if index==0:
@@ -70,6 +74,9 @@ def plot_defence_improvements(simout_defender: list[DefenseImprovement], state: 
 
 
 def plot_delta_sensitivity(simpout_delta: list[AttackerDeltaSimulation], save_root: str="plots"):
+    """
+
+    """
     fig = plt.figure(figsize=(10, 7))
     for sim in simpout_delta:
         plt.plot(sim.n_defenders, sim.p_win_history, marker="o", label=f'delta={sim.delta:2}')
@@ -78,6 +85,8 @@ def plot_delta_sensitivity(simpout_delta: list[AttackerDeltaSimulation], save_ro
         plt.xlabel('Number of units of the defender [Units]')
         plt.ylabel('Probability of win of the attacker')
         plt.grid()
+    plt.axhline(y = 0.5, color = 'r', linestyle = '-.')
+    plt.xlim(left=3)
     save_path = f"{save_root}/risk_attacker_strategy.png"
     fig.savefig(save_path, dpi=fig.dpi, bbox_inches="tight")
     logger.info(f" -- Plot saved at the following path: {save_path}")

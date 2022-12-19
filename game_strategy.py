@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Script to explore the best global strategy to play Risk (board game). 
+Script to explore the best global strategy to play Risk (game). 
 """
 import logging
 from src.simulation.mc import attacker_delta_simulator
@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 # Parameters
 DIE  = (1, 2, 3, 4, 5, 6) # define the die 
 RANGE_DEFENDERS = 65 # max number of defenders to be condidered
-DELTA_ATTACK = (10, 8, 5, 2, 1, 0, -1, -2, -5, -8, -10) # numerical delta (+/-) of the attacker
+DELTA_ATTACK = (10, 8, 5, 0, -5, -8, -10) # numerical delta (+/-) of the attacker
 
 if __name__ == "__main__":
     logger.info("Running attacker delta simulation. Hold on...")

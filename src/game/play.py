@@ -5,6 +5,9 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class State:
+    """
+    Initial state of the game as number of attackers and defenders
+    """
     A: int # Number of attackers
     D: int # Number of defenders
 

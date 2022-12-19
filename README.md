@@ -90,13 +90,13 @@ Pull requests are welcome. For significant changes, please open an issue to disc
 
 ## Conclusion
 
-To summarise, his repository implements a complete Monte Carlo Simulation of the game *Risk*. Through the simulation, some patterns specific to the game can be highlighted:
+To summarise, this repository implements a complete Monte Carlo Simulation of the game *Risk*. Through the simulation, some patterns specific to the game can be highlighted:
 
 **Attackers strategy tip:**
 
 - Aggressive strategies should be preferred over defensive ones
 - Attack a territory only with a numerical advantage
-- With more than five units than the defender, the probability of a win is ~90%
+- With more than five units than the defender, the probability of a win is more than 90%
 
 **Defenders strategy tip:**
 

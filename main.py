@@ -17,12 +17,12 @@ DIE  = (1, 2, 3, 4, 5, 6) # define the die
 
 if __name__ == "__main__":
     # Set the initial state of the simulation
-    state = State(A=10, D=10)
+    state = State(A=12, D=10)
     logger.info(f"Initial conditions: {state}")
 
     # Set up the game and the MC Simulation
     risk = RiskGame(die=DIE)
-    mcsim = MCSimulation(riskgame=risk, runs=1000)
+    mcsim = MCSimulation(riskgame=risk, runs=2000)
 
     # Attacker MC Simulation
     logger.info("Run simulation to estimate the attacker position...")
