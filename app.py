@@ -20,8 +20,8 @@ st.image("images/risk_game.jpg", caption="Risk game map")
 
 st.header("Input the state of the game")
 attacker = st.slider("Number of Attacker", 2, 50, 10)
-defenders = st.slider("Number of Defenders", 2, 50, 5)
-runs = st.slider("Number of Monte Carlo simulations", 100, 3000, 1000)
+defenders = st.slider("Number of Defenders", 1, 50, 5)
+runs = st.slider("Number of Monte Carlo simulations", 100, 3000, 1500)
 
 # Set the initial state of the simulation
 state = State(A=attacker, D=defenders)
