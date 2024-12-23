@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Main script to run the simulaion of Risk (board game) attack campaign 
+Main script to run the simulation of Risk (board game) attack campaign 
 """
 import logging
 from src.game.play import RiskGame, State
