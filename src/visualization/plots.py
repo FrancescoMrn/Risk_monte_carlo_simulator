@@ -11,7 +11,7 @@ from src.simulation.mc import AttackerDeltaSimulation, DefenseImprovement
 logger = logging.getLogger(__name__)
 
 # import style
-plt.style.use('seaborn-deep')
+plt.style.use('seaborn-v0_8-deep')
 
 def plot_histogram_probability(simout: Counter, state: State, save_root: str="plots", save_fig: bool=True) -> Figure:
     """
